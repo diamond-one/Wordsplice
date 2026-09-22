@@ -1,0 +1,24 @@
+# Local recordings, models, snapshots and logs
+/data/
+*.log
+
+# Python environments and generated files
+/.venv/
+/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local secrets and editor/OS state
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Optional development dependencies
+node_modules/

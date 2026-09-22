@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wordsplice — a sentence, many voices</title>
+  <meta name="description" content="A local studio for turning found dialogue into an audio collage.">
+  <link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip-link" href="#sentence">Skip to the studio</a>
+<header>
+  <a class="brand" href="/" aria-label="Wordsplice home"><span class="brand-mark">w/</span>wordsplice<span class="beta">LOCAL STUDIO</span></a>
+  <span class="local"><i></i> Recorded here. Saved here.</span>
+</header>
+<main>
+  <section class="intro">
+    <div><p class="eyebrow">FOUND VOICES. NEW MEANING.</p><h1>Your words. <span>A world of voices.</span></h1><p class="description">Turn real dialogue into a statement of your own. Find it, cut it, piece it together.</p></div>
+    <span class="intro-mark" aria-hidden="true">CUT / REBUILD</span>
+  </section>
+  <div id="error" class="error" role="alert" hidden></div>
+  <div class="workspace">
+    <section class="composer panel" aria-labelledby="write-heading">
+      <div class="section-top"><h2 id="write-heading"><span class="step">01</span> Write & direct</h2><span id="word-count" class="muted">8 words</span></div>
+      <div class="direction-bar"><label for="mode">Approach <select id="mode"><option value="statement">Constructed statement</option><option value="narrative">Narrative collage</option></select></label><p id="mode-description">Separate words, deliberate joins. Make different voices deliver one statement.</p></div>
+      <label class="sr-only" for="sentence">Sentence to assemble</label>
+      <textarea id="sentence" maxlength="600" spellcheck="true" aria-describedby="phrase-hint">I want - to live - on a boat</textarea>
+      <div class="phrase-guidance"><p id="phrase-hint">Use spaced dashes to choose where each phrase ends.</p><div id="phrase-preview" aria-live="polite"></div></div>
+      <div class="settings">
+        <label for="voice">Voice<select id="voice"><option value="">Any voice</option><option value="male">Male</option><option value="female">Female</option></select></label>
+        <label for="accent">Accent<select id="accent"><option value="">Any English</option><option value="us">American</option><option value="uk">British</option><option value="aus">Australian</option></select></label>
+        <label for="phrase-size">Auto grouping<select id="phrase-size"><option value="6">Dialogue fragments</option><option value="4">Short phrases</option><option value="2" selected>Word pairs</option><option value="1">Single words</option></select></label>
+      </div>
+      <div class="source-filter"><label for="topic">Source topic <span class="optional">optional</span><input id="topic" list="topic-ideas" maxlength="80" placeholder="Try history, cinema or science" autocomplete="off" aria-describedby="topic-hint"></label><datalist id="topic-ideas"><option value="history"><option value="cinema"><option value="politics"><option value="science"><option value="music"><option value="programming"><option value="travel"></datalist><small id="topic-hint">One topic, or a YouTube video/channel ID. Filters apply to new takes.</small></div>
+      <div class="composer-bottom"><button id="create" class="primary">Create audio <span>↗</span></button><button id="stop" class="danger" hidden>Stop recording</button><span class="capture-summary">Real voices. No generated speech.</span></div>
+      <div class="capture-note">In Chrome or Edge, share <b>this tab</b> with <b>tab audio</b> switched on when prompted.</div>
+    </section>
+    <section class="source panel" aria-labelledby="record-heading">
+      <div class="section-top"><h2 id="record-heading"><span class="step">02</span> Find & record</h2><span class="badge" id="source-state">STANDBY</span></div>
+      <div class="source-body">
+        <div class="player-wrap"><div id="player"></div><div id="player-placeholder"><span class="play-symbol" aria-hidden="true">▷</span><p>Your source, on the record.</p><small>Clips play here as each phrase is captured.</small></div></div>
+        <div class="source-detail"><p class="eyebrow">NOW ON THE CUTTING TABLE</p><h3 id="current-phrase">Waiting for your first phrase</h3><p id="caption" class="caption">Press Create audio to search real recordings for your words.</p><a id="source-link" class="text-link" target="_blank" rel="noopener" hidden>View on YouGlish ↗</a></div>
+        <div class="status-box"><i id="activity-dot" aria-hidden="true"></i><div><p id="status" role="status" aria-live="polite">Getting the studio ready…</p><small id="status-detail">No microphone is used. Only the tab audio is recorded.</small></div></div>
+      </div>
+      <div class="progress-line" aria-hidden="true"><div id="progress"></div></div>
+    </section>
+    <section class="assembly panel" aria-labelledby="collage-heading">
+      <div class="section-top"><h2 id="collage-heading"><span class="step">03</span> Shape your collage</h2><div class="assembly-tools"><button id="undo" class="secondary" hidden>↶ Undo edit</button><span id="clip-count" class="muted">0 clips</span></div></div>
+      <div id="timeline" class="timeline"><div class="empty-timeline"><span class="empty-icon" aria-hidden="true">▥ / ▥ / ▥</span><p>The statement takes shape here.</p><small>Your phrases appear in order. Select a cut to replace, split, join or trim it.</small></div></div>
+      <div id="trim-panel" hidden></div>
+      <div class="sound-controls"><label for="texture">Sound<select id="texture"><option value="clean">Clean source</option><option value="warm">Warm sampler</option><option value="radio">Narrow-band dialogue</option><option value="radio40">1940s-inspired radio</option><option value="tape70">1970s-inspired tape</option><option value="sampler90">1990s-inspired sampler</option></select></label><label for="gap">Space between cuts<select id="gap"><option value="0">Tight · 0 ms</option><option value="25" selected>Spliced · 25 ms</option><option value="75">Breathing · 75 ms</option><option value="150">Reflective · 150 ms</option></select></label><span>Era styles colour the sound.<br>They don’t filter the recording date.</span></div>
+      <div class="export-bar"><div class="export-info"><b id="mix-title">Waiting for your first cut</b><small id="mix-detail">Exact words · Automatic trimming · WAV export</small></div><audio id="mix-audio" controls hidden aria-label="Completed audio collage"></audio><div class="export-actions"><button id="remix" class="secondary" hidden>Update mix</button><a id="download" class="download disabled" aria-disabled="true">↓ Download WAV</a></div></div>
+    </section>
+  </div>
+  <footer><span>A sentence, many voices.</span><details><summary>How it works & privacy</summary><p>Wordsplice searches YouGlish, plays the referenced YouTube clips, and records the tab you select. Local speech recognition locates the words. Some phrases may be unavailable; listen back and adjust cuts before exporting.</p><p>Your microphone is never used. Only audio is saved; the screen video track is never recorded. Audio and the speech model stay on this computer. Search phrases go to YouGlish, and YouTube receives player requests. Use recordings you have permission to reuse. Wordsplice is independent of YouGlish and YouTube.</p><p><a href="https://youglish.com/about" target="_blank" rel="noopener">YouGlish</a> · <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube terms</a> · <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google privacy</a></p></details></footer>
+</main>
+<script src="/app.js" defer></script>
+</body>
+</html>
