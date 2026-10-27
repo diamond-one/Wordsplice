@@ -22,6 +22,8 @@ You need **Python 3.10 or newer**, **Chrome or Edge**, and an internet connectio
 4. Write a short sentence and choose **Create audio**. In the browser sharing dialog, select **this Wordsplice tab** and enable **Share tab audio**.
 5. Keep the tab open as sources play. When the collage is ready, listen, edit, and **Download WAV**.
 
+Keep the setup window open until it says **Audio libraries are ready**. During installation it reports progress periodically and saves detailed output to `data/setup.log`. If setup is interrupted, run the launcher again: it resumes dependency installation and verifies the audio libraries before starting the server. Setup does not delete saved recordings.
+
 The app needs browser tab-audio capture. Use Chrome or Edge for recording; an embedded preview may display the studio without supporting capture. No separate FFmpeg installation is required: audio decoding uses PyAV.
 
 ## From sentence to collage
@@ -104,7 +106,8 @@ Source rights remain with their owners. Use recordings you have permission to re
 | No usable phrase | Try **Resume recording**, add a dash to shorten the phrase, or broaden voice/topic filters. |
 | Words or joins sound wrong | Audition the cut, adjust In/Out, or find another take. Speech recognition and initial boundaries can be imperfect. |
 | Model setup fails | Check your connection and available disk space, then restart. The first model download may take several minutes. |
-| Studio does not start | Check `data/studio.log`, verify Python is installed, and ensure port 8765 is free. Retry the launcher if dependency installation was interrupted. |
+| Setup stops at “Installing collected packages” | This line does not confirm success. Run the launcher again to finish an interrupted installation. Check `data/setup.log` if it reports a failure. |
+| Studio does not start | Check `data/setup.log` for installation/import errors or `data/studio.log` for server errors. Verify Python is installed and port 8765 is free. |
 | Local save fails | Use a writable folder and check disk space. Saves use uniquely named snapshots to avoid Windows file-replacement conflicts. |
 
 Search reads public YouGlish page data, not a guaranteed REST API. Site changes and access restrictions can interrupt it. The app does not bypass restrictions or directly download YouTube audio. Exact-word matching is attempted, but source availability, ads, noise, and recognition errors mean not every sentence will complete.
@@ -120,6 +123,8 @@ py -3 -m venv .venv
 ```
 
 Open `http://127.0.0.1:8765`. The server also accepts `--port 8766` and `--open`. On other operating systems, use the equivalent `.venv/bin/python`; tab-audio support is browser/platform dependent and the launcher workflow has been developed for Windows.
+
+For startup diagnostics without opening a browser, run `py -3 launch.py --no-browser` (or `"Start Wordsplice.cmd" --no-browser` from Command Prompt). Launcher failures return a nonzero exit code and do not wait for input when run non-interactively. `WORDSPLICE_DATA` also determines where the launcher writes its setup and server logs.
 
 | File | Responsibility |
 | --- | --- |
